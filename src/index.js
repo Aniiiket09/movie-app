@@ -9,16 +9,16 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const store = legacy_createStore(movies);
 console.log("store ", store);
-console.log(" Before State ", store.getState());
+// console.log(" Before State ", store.getState());
 
-store.dispatch({
-  type: "ADD_MOVIES",
-  movies: [{ title: "Superman" }],
-});
-console.log(" After State ", store.getState());
+// store.dispatch({
+//   type: "ADD_MOVIES",
+//   movies: [{ title: "Superman" }],
+// });
+// console.log(" After State ", store.getState());
 
 root.render(
   <React.StrictMode>
-    <App />
+    <App store={store} />
   </React.StrictMode>
 );
