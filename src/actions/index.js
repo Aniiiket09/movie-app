@@ -5,3 +5,15 @@
 // {
 // type :'DECREASE_COUNT',
 // }
+
+//action types
+export const ADD_MOVIES = "ADD_MOVIES";
+
+//actions creator
+export function addMovies(movies, id) {
+  return {
+    type: ADD_MOVIES,
+    movies,
+    id,
+  };
+}
