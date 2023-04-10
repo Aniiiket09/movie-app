@@ -17,3 +17,13 @@ export function addMovies(movies, id) {
     id,
   };
 }
+//action types
+export const ADD_FAVOURITE = "ADD_FAVOURITE";
+
+//actions creator
+export function addFavourite(movie) {
+  return {
+    type: ADD_FAVOURITE,
+    movie,
+  };
+}
