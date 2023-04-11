@@ -8,15 +8,24 @@ import rootReducer from "./reducer";
 
 //fuction logger(obj,dispatch, getState)
 //logger(obj)(dispatch)(getState)
-const logger = function ({ dispatch, getState }) {
-  return function (next) {
-    return function (action) {
-      //middleware code
-      console.log("ACTION_TYPE=", action.type);
-      next(action);
-    };
+// const logger = function ({ dispatch, getState }) {
+//   return function (next) {
+//     return function (action) {
+//       //middleware code
+//       console.log("ACTION_TYPE=", action.type);
+//       next(action);
+//     };
+//   };
+// };
+
+const logger =
+  ({ dispatch, getState }) =>
+  (next) =>
+  (action) => {
+    //logger code
+    console.log("ACTION_TYPE=", action.type);
+    next(action);
   };
-};
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
