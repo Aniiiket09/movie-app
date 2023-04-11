@@ -4,10 +4,10 @@ import { legacy_createStore } from "redux";
 
 import "./index.css";
 import App from "./components/App";
-import movies from "./reducer";
+import rootReducer from "./reducer";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const store = legacy_createStore(movies);
+const store = legacy_createStore(rootReducer);
 console.log("store ", store);
 // console.log(" Before State ", store.getState());
 
