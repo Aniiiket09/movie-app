@@ -1,10 +1,11 @@
-import React, { createContext } from "react";
+import React, { Component, createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { legacy_createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import "./index.css";
 import App from "./components/App";
 import rootReducer from "./reducer";
+import connectAppComponents from "./components/App";
 
 //fuction logger(obj,dispatch, getState)
 //logger(obj)(dispatch)(getState)
@@ -66,6 +67,44 @@ class Provider extends React.Component {
 //   movies: [{ title: "Superman" }],
 // });
 // console.log(" After State ", store.getState());
+
+// const connectedComponent = connect(callback)(App);
+export function connect(callback) {
+  return function (Component) {
+    class ConnectedComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.unsubscribe = this.props.store.subscribe(() => {
+          this.forceUpdate();
+        });
+      }
+
+      componentWillUnmount() {
+        this.unsubscribe();
+      }
+      render() {
+        const { store } = this.props;
+        const state = store.getState();
+        const dataToBeSentAsProps = callback(state);
+
+        return <Component dispatch={store.dispatch} {...dataToBeSentAsProps} />;
+      }
+    }
+
+    class ConnectedComponentWrapper extends React.Component {
+      render() {
+        return (
+          <StoreContext.Consumer>
+            {(store) => {
+              return <ConnectedComponent store={store} />;
+            }}
+          </StoreContext.Consumer>
+        );
+      }
+    }
+    return ConnectedComponentWrapper;
+  };
+}
 
 root.render(
   <React.StrictMode>
