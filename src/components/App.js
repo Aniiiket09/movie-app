@@ -1,9 +1,10 @@
 import { data } from "../data";
+import { Connect, connect } from "react-redux";
 import React from "react";
 import Navbar from "./Navbar";
 import MovieCard from "./MovieCard";
 import { addMovies, setShowFavourites } from "../actions";
-import { connect } from "..";
+// import { connect } from "..";
 
 class App extends React.Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class App extends React.Component {
   }
 
   isMovieFavourite = (movie) => {
-    const { movies, search } = this.props;
+    const { movies } = this.props;
 
     const index = movies.favourites.indexOf(movie);
     if (index !== -1) {
